@@ -4,14 +4,15 @@ import pandas as pd
 import re
 from datetime import datetime
 import os
-from pandas.core.frame import DataFrame
+from os import path
 import yfinance as yf
 import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
+abspath = path.abspath('files')
 
 # Variables a consultar
-direccion = 'comission:\\Users\\jpgz3\\OneDrive - ITESO\\9 semestre\\MySt\\LAB1\\MYST_LAB1_EQUIPO1\\files'
+direccion = abspath
 data_files = {}
 fechas = []
 fecha_formato = []
@@ -20,7 +21,7 @@ inv_i = 1000000
 comission = 0.00125
 
 
-for i in os.listdir(direccion):
+for i in os.listdir(abspath):
     fechas.append(re.search(r'\d+',i).group(0))
     fechas.sort(key=lambda date:datetime.strptime(date,'%Y%m%d'))
 fecha_formato = [(pd.to_datetime(fechas[j]).date()).strftime('%Y-%m-%d') for j in range(len(fechas))]
